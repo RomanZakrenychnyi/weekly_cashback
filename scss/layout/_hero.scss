@@ -47,7 +47,7 @@
     flex-basis: 55%; 
     flex-grow: 1;    
     position: relative; 
-    background-image: image-set(url(../../img/desktop/promo_banner@1x.webp) 1x, url(../../img/desktop/promo_banner@2x.webp) 2x);
+    background-image: image-set(url(../img/desktop/promo_banner@1x.webp) 1x, url(../img/desktop/promo_banner@2x.webp) 2x);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right;
@@ -57,8 +57,8 @@
 @container main-content (max-width: 1440px) {
     .promo-banner__image {
         background-image: image-set(
-            url(../../img/desktop/promo_banner_1366@1x.webp) 1x, 
-            url(../../img/desktop/promo_banner_1366@2x.webp) 2x
+            url(../img/desktop/promo_banner_1366@1x.webp) 1x, 
+            url(../img/desktop/promo_banner_1366@2x.webp) 2x
         );
         aspect-ratio: 729 / 394;
 
@@ -94,8 +94,8 @@
         width: 100%;
         min-height: 266px; 
         background-image: image-set(
-            url(../../img/mobile/promo_banner_360@1x.webp) 1x, 
-            url(../../img/mobile/promo_banner_360@2x.webp) 2x
+            url(../img/mobile/promo_banner_360@1x.webp) 1x, 
+            url(../img/mobile/promo_banner_360@2x.webp) 2x
         );
         aspect-ratio: 328 / 266;
     }

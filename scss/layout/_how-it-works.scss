@@ -89,8 +89,8 @@ $gap-value: 10px;
   top: 104px;
   border: 1px solid $color-text-red;
   background-image: image-set(
-    url(../../img/desktop/roulette@1x.webp) 1x,
-    url(../../img/desktop/roulette@2x.webp) 2x
+    url(../img/desktop/roulette@1x.webp) 1x,
+    url(../img/desktop/roulette@2x.webp) 2x
   );
   background-size: cover;
   background-repeat: no-repeat;
@@ -104,8 +104,8 @@ $gap-value: 10px;
   top: 460px;
   border: 1px solid $color-text-purple;
   background-image: image-set(
-    url(../../img/desktop/treasure-chest@1x.webp) 1x,
-    url(../../img/desktop/treasure-chest@2x.webp) 2x
+    url(../img/desktop/treasure-chest@1x.webp) 1x,
+    url(../img/desktop/treasure-chest@2x.webp) 2x
   );
   background-size: cover;
   background-repeat: no-repeat;
@@ -119,8 +119,8 @@ $gap-value: 10px;
   top: 820px;
   border: 1px solid $color-text-olive-yellow;
   background-image: image-set(
-    url(../../img/desktop/calendar@1x.webp) 1x,
-    url(../../img/desktop/calendar@2x.webp) 2x
+    url(../img/desktop/calendar@1x.webp) 1x,
+    url(../img/desktop/calendar@2x.webp) 2x
   );
   background-size: cover;
   background-repeat: no-repeat;
@@ -136,22 +136,22 @@ $gap-value: 10px;
 @container main-content (max-width: 1366px) {
   .how-it-works__item--step-1 {
     background-image: image-set(
-      url(../../img/desktop/roulette_1366@1x.webp) 1x,
-      url(../../img/desktop/roulette_1366@2x.webp) 2x
+      url(../img/desktop/roulette_1366@1x.webp) 1x,
+      url(../img/desktop/roulette_1366@2x.webp) 2x
     );
   }
 
   .how-it-works__item--step-2 {
     background-image: image-set(
-      url(../../img/desktop/treasure-chest_1366@1x.webp) 1x,
-      url(../../img/desktop/treasure-chest_1366@2x.webp) 2x
+      url(../img/desktop/treasure-chest_1366@1x.webp) 1x,
+      url(../img/desktop/treasure-chest_1366@2x.webp) 2x
     );
   }
 
   .how-it-works__item--step-3 {
     background-image: image-set(
-      url(../../img/desktop/calendar_1366@1x.webp) 1x,
-      url(../../img/desktop/calendar_1366@2x.webp) 2x
+      url(../img/desktop/calendar_1366@1x.webp) 1x,
+      url(../img/desktop/calendar_1366@2x.webp) 2x
     );
   }
 }
@@ -358,16 +358,16 @@ $gap-value: 10px;
 
   .how-it-works__item--step-1 {
     background-image: image-set(
-      url(../../img/mobile/roulette_360@1x.webp) 1x,
-      url(../../img/mobile/roulette_360@2x.webp) 2x
+      url(../img/mobile/roulette_360@1x.webp) 1x,
+      url(../img/mobile/roulette_360@2x.webp) 2x
     );
     background-position: center;
   }
 
   .how-it-works__item--step-2 {
     background-image: image-set(
-      url(../../img/mobile/treasure-chest_360@1x.webp) 1x,
-      url(../../img/mobile/treasure-chest_360@2x.webp) 2x
+      url(../img/mobile/treasure-chest_360@1x.webp) 1x,
+      url(../img/mobile/treasure-chest_360@2x.webp) 2x
     );
     background-position: center;
   }
@@ -379,8 +379,8 @@ $gap-value: 10px;
 
   .how-it-works__item--step-3 {
     background-image: image-set(
-      url(../../img/mobile/calendar_360@1x.webp) 1x,
-      url(../../img/mobile/calendar_360@2x.webp) 2x
+      url(../img/mobile/calendar_360@1x.webp) 1x,
+      url(../img/mobile/calendar_360@2x.webp) 2x
     );
     background-position: center;
   }
