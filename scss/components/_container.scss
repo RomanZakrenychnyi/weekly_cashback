@@ -1,0 +1,14 @@
+@use "../base/variables" as *;
+
+.container {
+  container-type: inline-size;
+  container-name: main-content;
+  contain: layout;
+
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.Layout_twoColumnFullHd--QGp .Layout_column--QXt:nth-child(2) {
+  overflow: visible !important;
+}

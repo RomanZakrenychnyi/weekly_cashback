@@ -1,0 +1,103 @@
+@use "../base/variables" as *;
+@use "../components/button" as *;
+
+.cta {
+  position: relative;
+  top: -2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 120px;
+
+  background-color: #181921;
+  border-radius: $border-radius-container;
+  overflow: hidden;
+
+  background-image: image-set(
+    url(../../img/desktop/cta_banner@1x.webp) 1x,
+    url(../../img/desktop/cta_banner@2x.webp) 2x
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left;
+  aspect-ratio: 1760 / 456;
+}
+
+@container main-content (max-width: 1440px) {
+  .cta {
+    background-image: image-set(
+      url(../../img/desktop/cta_banner_1366@1x.webp) 1x,
+      url(../../img/desktop/cta_banner_1366@2x.webp) 2x
+    );
+    aspect-ratio: 1270 / 374;
+  }
+}
+
+.cta__content {
+  margin-left: auto;
+  flex-basis: 43%;
+  flex-grow: 0;
+  padding-top: clamp(16px, 2vw, 50px);
+  padding-bottom: clamp(18px, 2vw, 50px);
+  z-index: 2;
+}
+
+.cta__title {
+  margin-bottom: 24px;
+  font-size: clamp(32px, 2.08vw, 40px);
+  text-align: left;
+}
+
+.cta__subtitle {
+  max-width: 380px;
+  font-size: clamp(16px, 1.24vw, 24px);
+  font-weight: 900;
+  margin-bottom: 60px;
+  color: $color-text-secondary;
+}
+
+.cta__subtitle--color {
+  color: $color-text-secondary;
+  font-weight: 700;
+}
+
+.cta__button {
+  @include button-desktop;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .cta {
+    min-height: 480px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 60px;
+
+    background-image: image-set(
+      url(../../img/mobile/cta_banner_360@1x.webp) 1x,
+      url(../../img/mobile/cta_banner_360@2x.webp) 2x
+    );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+    aspect-ratio: 328 / 477;
+  }
+
+  .cta__content {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .cta__title {
+    margin-bottom: 10px;
+  }
+
+  .cta__subtitle {
+    margin-bottom: 32px;
+  }
+
+  .cta__button {
+    @include button-mob;
+  }
+}

@@ -1,0 +1,29 @@
+@use "../base/variables" as *;
+
+@mixin button-desktop {
+    font-size: 18px;
+    font-weight: 700;
+    
+    // Кольори та межі
+    background-color: $bgc-btn; 
+    color: $color-text-btn;    
+    border: 1px solid $bgc-btn;
+    border-radius: $border-radius-button; 
+    text-transform: uppercase;
+    
+    // Вирівнювання та розмір (Десктоп)
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 50px;
+    cursor: pointer;
+}
+
+@mixin button-mob {
+    width: 296px;
+    height: 40px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+}

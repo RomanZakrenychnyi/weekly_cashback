@@ -1,0 +1,15 @@
+@use "../base/variables" as *;
+@use "../components/button" as *;
+
+.indentation {
+  position: relative;
+  width: 100%;
+  height: 122px;
+  background-color: $bgc-general;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .indentation {
+    height: 60px;
+  }
+}

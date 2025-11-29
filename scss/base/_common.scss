@@ -1,0 +1,15 @@
+@use "../base/variables" as *;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $bgc-general;
+  color: $color-text-primary;
+
+
+  font-family: "Sofia Sans",sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+}

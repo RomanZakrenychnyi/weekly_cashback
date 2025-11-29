@@ -1,0 +1,102 @@
+@use "../base/variables" as *;
+@use "../components/button" as *;
+
+.promo-banner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 120px;
+    
+    background-color: #181921;
+    border-radius: $border-radius-container;
+    overflow: hidden; 
+}
+
+.promo-banner__content {
+    flex-basis: 45%; 
+    flex-grow: 0;
+    padding-top: clamp(16px, 2vw, 60px);
+    padding-bottom: clamp(18px, 2vw, 60px);
+    padding-left: clamp(16px, 3.06vw, 60px);
+    z-index: 2; 
+}
+
+.promo-banner__title {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.promo-banner__subtitle {
+    font-size: clamp(18px,1.22vw,24px);
+    font-weight: 900;
+    margin-bottom: 60px;
+}
+
+.promo-banner__subtitle--color {
+    color: $color-text-secondary;
+    font-weight: 700;
+}
+
+.promo-banner__button {
+    @include button-desktop;
+}
+
+.promo-banner__image {
+    flex-basis: 55%; 
+    flex-grow: 1;    
+    position: relative; 
+    background-image: image-set(url(../../img/desktop/promo_banner@1x.webp) 1x, url(../../img/desktop/promo_banner@2x.webp) 2x);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+    aspect-ratio: 1026 / 493;
+}
+
+@container main-content (max-width: 1440px) {
+    .promo-banner__image {
+        background-image: image-set(
+            url(../../img/desktop/promo_banner_1366@1x.webp) 1x, 
+            url(../../img/desktop/promo_banner_1366@2x.webp) 2x
+        );
+        aspect-ratio: 729 / 394;
+
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    
+    .promo-banner {
+        flex-direction: column; 
+        align-items: flex-start; 
+        margin-bottom: 60px;
+    }
+
+    .promo-banner__content {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .promo-banner__title {
+        margin-bottom: 10px;
+    }
+
+    .promo-banner__subtitle {
+        margin-bottom: 32px;
+    }
+    
+    .promo-banner__button {
+        @include button-mob;
+    }
+
+    .promo-banner__image {
+        width: 100%;
+        min-height: 266px; 
+        background-image: image-set(
+            url(../../img/mobile/promo_banner_360@1x.webp) 1x, 
+            url(../../img/mobile/promo_banner_360@2x.webp) 2x
+        );
+        aspect-ratio: 328 / 266;
+    }
+}

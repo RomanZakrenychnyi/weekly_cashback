@@ -1,0 +1,442 @@
+@use "../base/variables" as *;
+@use "../components/button" as *;
+
+.how-it-works__container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  transform: translateZ(0);
+}
+
+.how-it-works__wrapper {
+  flex-basis: 26%;
+  position: sticky;
+  top: 104px;
+  height: max-content;
+  // z-index: 20;
+}
+
+$wrapper-width: 26%; // how-it-works__wrapper flex-basis
+$steps-width: 64.5%; // steps-wrapper flex-basis
+$gap-value: 10px;
+
+.steps-wrapper.is-fixed {
+  position: fixed;
+  top: 0;
+  right: 0; // ⬅️ Ось ваше точне положення справа!
+  width: 64.5%;
+  height: auto;
+}
+
+.steps-wrapper.is-ended {
+  position: absolute;
+
+  // Горизонтальне позиціонування (як ми обговорювали раніше)
+  width: $steps-width;
+  right: 0;
+  margin-left: 0;
+}
+
+.steps-wrapper--spacer {
+  display: none;
+  width: 64%; /* Має відповідати ширині steps-wrapper */
+
+  // Розрахунок висоти (3 картки * 450px) + (2 відступи * 30px) = 1350 + 60 = 1410px
+  // Висота: (3 * CARD_HEIGHT) + ((3-1) * GAP)
+  height: calc(3 * 450px);
+}
+
+// Увімкнення заповнювача
+.steps-wrapper.is-fixed + .steps-wrapper--spacer {
+  display: block;
+}
+
+.how-it-works__title {
+  text-align: left;
+  margin-bottom: 60px;
+}
+
+.how-it-works__button {
+  @include button-desktop;
+  width: 274px;
+}
+
+.steps-wrapper {
+  flex-basis: 64.5%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: $steps-width;
+  height: auto;
+}
+
+.how-it-works__item {
+  position: relative;
+  max-height: 450px;
+  height: 450px;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: #14141a;
+
+  transition: transform 0.3s ease-out;
+  z-index: 1;
+}
+
+.how-it-works__item--step-1 {
+  position: sticky;
+  top: 104px;
+  border: 1px solid $color-text-red;
+  background-image: image-set(
+    url(../../img/desktop/roulette@1x.webp) 1x,
+    url(../../img/desktop/roulette@2x.webp) 2x
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  z-index: 3;
+}
+
+.how-it-works__item--step-2 {
+  position: sticky;
+  top: 460px;
+  border: 1px solid $color-text-purple;
+  background-image: image-set(
+    url(../../img/desktop/treasure-chest@1x.webp) 1x,
+    url(../../img/desktop/treasure-chest@2x.webp) 2x
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  z-index: 4;
+}
+
+.how-it-works__item--step-3 {
+  position: sticky;
+  top: 820px;
+  border: 1px solid $color-text-olive-yellow;
+  background-image: image-set(
+    url(../../img/desktop/calendar@1x.webp) 1x,
+    url(../../img/desktop/calendar@2x.webp) 2x
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  z-index: 5;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+@container main-content (max-width: 1366px) {
+  .how-it-works__item--step-1 {
+    background-image: image-set(
+      url(../../img/desktop/roulette_1366@1x.webp) 1x,
+      url(../../img/desktop/roulette_1366@2x.webp) 2x
+    );
+  }
+
+  .how-it-works__item--step-2 {
+    background-image: image-set(
+      url(../../img/desktop/treasure-chest_1366@1x.webp) 1x,
+      url(../../img/desktop/treasure-chest_1366@2x.webp) 2x
+    );
+  }
+
+  .how-it-works__item--step-3 {
+    background-image: image-set(
+      url(../../img/desktop/calendar_1366@1x.webp) 1x,
+      url(../../img/desktop/calendar_1366@2x.webp) 2x
+    );
+  }
+}
+
+.how-it-works__number {
+  font-size: clamp(32px, 3.06vw, 60px);
+  font-weight: 400;
+}
+
+.how-it-works__item--step-1 .how-it-works__number {
+  color: $color-text-red;
+}
+
+.how-it-works__item--step-2 .how-it-works__number {
+  color: $color-text-purple;
+}
+
+.how-it-works__item--step-3 .how-it-works__number {
+  color: $color-text-olive-yellow;
+}
+
+.how-it-works__content {
+  margin-top: 154px;
+}
+
+// ... (Ваш код до цього місця)
+
+.how-it-works__content-title {
+  /* Розміри стрілки */
+  --arrow-width: 20px;
+  --arrow-height: 60px; /* Висота заголовка (5px + 7px + font-size ~40px) */
+  --overlap: 2px; /* Наскільки стрілка "заходить" на фон */
+
+  position: relative;
+  display: inline-block;
+
+  background-color: var(--bg);
+
+  display: inline-block;
+  /* Або display: block, якщо ви хочете, щоб він займав всю доступну ширину */
+
+  height: 60px;
+  /* ❗ КЛЮЧОВИЙ ФІКС: Встановлюємо висоту рядка, рівну висоті елемента */
+  line-height: 48px;
+  margin-bottom: 24px;
+  padding-top: 5px;
+  padding-right: var(--arrow-width);
+  padding-bottom: 7px;
+  padding-left: 13px;
+  border-radius: 5px;
+  font-size: clamp(24px, 2.082vw, 40px);
+  font-weight: 700;
+}
+
+.how-it-works__content-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+
+  border-left: var(--arrow-width) solid var(--bg);
+
+  border-top: calc(var(--arrow-height) / 2) solid rgba(0, 0, 0, 0);
+  border-bottom: calc(var(--arrow-height) / 2) solid rgba(0, 0, 0, 0);
+
+  right: calc(0px - var(--arrow-width) + var(--overlap));
+
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.how-it-works__content-title--1 {
+  background-color: $bgc-red;
+  --bg: #{$bgc-red};
+}
+
+.how-it-works__content-title--2 {
+  background-color: $bgc-purple;
+  --bg: #{$bgc-purple};
+}
+
+.how-it-works__content-title--3 {
+  background-color: $bgc-olive-yellow;
+  --bg: #{$bgc-olive-yellow};
+}
+
+.how-it-works__text {
+  max-width: 370px;
+  color: #bfbfcb;
+  font-size: clamp(16px, 0.935vw, 18px);
+  font-weight: 400;
+}
+
+.how-it-works__text--white {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.btn-bottom {
+  display: none;
+}
+
+.how-it-works.is-pinned-to-top {
+  position: fixed;
+  top: 0;
+  left: 50%; /* Центрування секції */
+  transform: translateX(-50%);
+  width: 100%;
+  /* Встановіть тут max-width, який відповідає максимальній ширині вашого how-it-works */
+  max-width: 1366px;
+  z-index: 10; /* Достатньо, щоб бути поверх звичайного контенту */
+}
+
+.how-it-works.is-hidden-after {
+  /* Ховаємо секцію, коли на неї наїхав аккордеон */
+  opacity: 0;
+  visibility: hidden;
+  // transition: opacity 0.3s ease, visibility 0.3s ease; /* Для плавного зникнення */
+}
+
+.how-it-works__container.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  // transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sentinel-end-marker {
+  height: 1px; /* Мінімальна висота, щоб Observer міг його відстежит и */
+  /* Можна додати відступ, якщо потрібно, щоб спрацювало раніше/пізніше */
+  /* margin-top: 200px; */
+}
+
+// -------------------------------------------------------------------
+// --- АДАПТИВНІСТЬ: МОБІЛЬНА ВЕРСІЯ (< 767px) ---
+// -------------------------------------------------------------------
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .how-it-works__container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .btn-top {
+    display: none;
+  }
+
+  .btn-bottom {
+    display: flex;
+    position: absolute;
+    bottom: -12vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+
+  .steps-wrapper {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .how-it-works__item {
+    padding: 16px;
+    height: 425px;
+  }
+
+  .how-it-works__content {
+    margin-top: 20px;
+  }
+
+  .how-it-works__content-title {
+    /* ❗ ФІКС 1: Дозволяємо елементу розтягуватися на всю ширину і висоту тексту */
+    display: block;
+    white-space: normal; /* Дозволяємо перенесення рядків */
+
+    /* ❗ ФІКС 2: Змінюємо line-height на відносне значення */
+    line-height: 1.2; /* Комфортний інтерліньяж */
+
+    /* Зберігаємо ваші вертикальні відступи */
+    padding-block: 10px;
+    margin-bottom: 16px;
+
+    /* Скидаємо фіксовану висоту, якщо вона була встановлена десь у глобальних стилях */
+    height: auto;
+    max-width: 250px;
+  }
+
+  /* ❗ ФІКС 3: Коригуємо псевдоелемент ::after для розтягування на всю висоту */
+  .how-it-works__content-title::after {
+    /* Розтягуємо стрілку на всю висоту блоку */
+    top: 0;
+    bottom: 0;
+
+    /* Скидаємо старі логіки, що ґрунтувалися на фіксованій висоті 60px */
+    border-top: none;
+    border-bottom: none;
+
+    /* Відновлюємо форму трикутника, використовуючи top/bottom для висоти */
+    border-top: 38px solid rgba(0, 0, 0, 0); /* 60px / 2 */
+    border-bottom: 38px solid rgba(0, 0, 0, 0);
+
+    /* Решта логіки позиціонування залишається без змін */
+    right: calc(0px - var(--arrow-width) + var(--overlap));
+  }
+
+  .how-it-works__item--step-1 {
+    background-image: image-set(
+      url(../../img/mobile/roulette_360@1x.webp) 1x,
+      url(../../img/mobile/roulette_360@2x.webp) 2x
+    );
+    background-position: center;
+  }
+
+  .how-it-works__item--step-2 {
+    background-image: image-set(
+      url(../../img/mobile/treasure-chest_360@1x.webp) 1x,
+      url(../../img/mobile/treasure-chest_360@2x.webp) 2x
+    );
+    background-position: center;
+  }
+
+  .how-it-works__content-title--2::after {
+    border-top: 23px solid rgba(0, 0, 0, 0); /* 60px / 2 */
+    border-bottom: 23px solid rgba(0, 0, 0, 0);
+  }
+
+  .how-it-works__item--step-3 {
+    background-image: image-set(
+      url(../../img/mobile/calendar_360@1x.webp) 1x,
+      url(../../img/mobile/calendar_360@2x.webp) 2x
+    );
+    background-position: center;
+  }
+
+  .steps-wrapper.is-fixed {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+  }
+
+  .how-it-works__item {
+    position: sticky;
+    width: 100%;
+    margin-top: 0; /* Усуваємо зовнішні відступи, щоб не було стрибків */
+    z-index: 10;
+
+    /* Щоб гарантувати, що стилі is-fixed та transform не конфліктують */
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .how-it-works__item:nth-child(1) {
+    top: 8vh;
+    z-index: 5;
+  }
+
+  .how-it-works__item:nth-child(2) {
+    top: 14vh;
+    z-index: 6;
+  }
+
+  .how-it-works__item:nth-child(3) {
+    top: 20vh;
+    z-index: 7;
+  }
+
+  .steps-wrapper {
+    min-height: 1600px;
+    flex-direction: column;
+    padding-bottom: 0 !important;
+    position: static !important; /* Уникаємо конфлікту з is-fixed */
+  }
+
+  .opacity-0 {
+    display: none;
+  }
+}
+
+.how-it-works.is-hidden-after {
+  /* Прибираємо з потоку, видаляючи висоту та видимість */
+  padding: 0 !important;
+  margin: 0 !important;
+
+  /* Додатково: щоб приховати вміст, якщо він був висунутий */
+  overflow: hidden !important;
+
+  /* Обов'язково: прибираємо з DOM-потоку (хоч і м'якше за display: none) */
+  visibility: hidden !important;
+}

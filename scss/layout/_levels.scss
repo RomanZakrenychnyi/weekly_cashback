@@ -1,0 +1,486 @@
+@use "../base/variables" as *;
+
+// --- ЗАГАЛЬНА СТРУКТУРА ТА ТЕКСТ ---
+.cashback-levels {
+  margin-bottom: 130px;
+}
+.cashback-levels__title {
+  font-size: clamp(30px, 3.06vw, 60px);
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cashback-levels__content-wrap {
+  position: relative;
+  max-width: 1760px;
+  margin: 0 auto;
+}
+
+.cashback-levels__top-row,
+.cashback-levels__bottom-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+// --- ЕЛЕМЕНТИ РІВНІВ (ТОП) ---
+.cashback-levels__item-top {
+  position: relative;
+  width: 30%;
+  text-align: center;
+  border-bottom: 1px solid #3b3450;
+
+  background-image: url(../../img/desktop/ellipse_top.webp);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom center;
+}
+
+.cashback-levels__percent-wrapper {
+  position: relative;
+  height: 168px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cashback-levels__percent {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 40%);
+  transition: transform 0.5s ease-out;
+  font-size: clamp(80px, 7.81vw, 150px);
+  font-weight: 400;
+  text-transform: uppercase;
+
+  background: linear-gradient(180deg, #fd5022 0%, #14141a 85%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cashback-levels__item-top.is-active .cashback-levels__percent {
+  transform: translate(-50%, 0);
+}
+
+@container main-content (min-width: 768px) {
+  .cashback-levels__details-content .cashback-levels__percent {
+    display: none;
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .cashback-levels__percent {
+    position: static;
+    transform: translate(0);
+  }
+}
+
+// --- ЕЛЕМЕНТИ РІВНІВ (НИЗ) ---
+.cashback-levels__item-bottom {
+  width: 30%;
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid #3b3450;
+  overflow: hidden;
+
+  background-image: url(../../img/desktop/ellipse_bottom.webp);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top center;
+}
+
+.cashback-levels__details-content {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+// ОБ'ЄДНАНО: Видалили .is-active, оскільки використовується тільки .is-hovered
+.cashback-levels__item-bottom.is-active .cashback-levels__details-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cashback-levels__amount {
+  color: $color-text-red;
+  font-size: clamp(24px, 3.12vw, 60px);
+  font-weight: 400;
+}
+
+.cashback-levels__cashback {
+  margin-bottom: 18px;
+  color: #ffffff;
+  font-size: clamp(16px, 1.25vw, 24px);
+  font-weight: 700;
+}
+
+.cashback-levels__condition {
+  max-width: 390px;
+  margin: 0 auto;
+  color: $color-text-secondary;
+  font-size: clamp(16px, 0.935vw, 18px);
+  font-weight: 400;
+}
+
+.cashback-levels__condition--white {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+// --- ТРЕК ПРОГРЕС-БАРА ---
+.cashback-levels__track-wrapper {
+  margin-block: 45px;
+}
+
+.cashback-levels__track {
+  position: relative;
+  z-index: 1;
+  max-width: 1760px;
+  width: 100%;
+  margin: 0 auto; // Видалили дублювання margin: 30px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+.cashback-levels__segment {
+  width: 35px;
+  height: 22px;
+  flex-shrink: 0;
+
+  padding: 4px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-image: linear-gradient(180deg, #fd5022, #3b3450) 1;
+}
+
+.cashback-levels__bar {
+  width: 100%;
+  height: 100%;
+  border-radius: 1px;
+  background: linear-gradient(180deg, #e5ff3a 0%, #fd5022 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  visibility: hidden;
+}
+
+// --- АНІМАЦІЯ БАРА (SCSS Логіка) ---
+$total-segments: 42;
+$mobile-segments: 27;
+$segments-for-small-mobile: 25;
+$single-fill-duration: 0.25s;
+$breakpoint-tablet: 1366px;
+$breakpoint-mobile: 767px;
+
+@keyframes segment-fill {
+  to {
+    transform: scaleX(1);
+    visibility: visible;
+  }
+}
+
+@keyframes segment-fill-vertical {
+  to {
+    transform: scaleY(1);
+    visibility: visible;
+  }
+}
+
+@for $i from 1 through $total-segments {
+  .cashback-levels__segment.is-active:nth-child(#{$i}) .cashback-levels__bar {
+    animation-name: segment-fill;
+    animation-duration: $single-fill-duration;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+
+    animation-delay: ($i - 1) * $single-fill-duration;
+
+    @if $i == 1 {
+      animation-duration: 0.001s;
+    }
+  }
+}
+
+// --- АДАПТИВНІСТЬ ТРЕКУ ---
+@container main-content (max-width: 1845px) {
+  @for $i from 41 through 42 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1770px) {
+  @for $i from 39 through 40 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1695px) {
+  @for $i from 37 through 38 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1620px) {
+  @for $i from 35 through 36 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1545px) {
+  @for $i from 33 through 34 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1470px) {
+  @for $i from 31 through 32 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1395px) {
+  @for $i from 29 through 30 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1320px) {
+  @for $i from 27 through 28 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1245px) {
+  @for $i from 25 through 26 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1170px) {
+  @for $i from 23 through 24 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+@container main-content (max-width: 1095px) {
+  @for $i from 21 through 22 {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+
+@container main-content (max-width: 767px) {
+  .cashback-levels__segment:nth-child(5),
+  .cashback-levels__segment:nth-child(14),
+  .cashback-levels__segment:nth-child(24) {
+    box-shadow: -40px 0 50px 60px rgba(253, 80, 34, 0.4);
+    background: #fd502266;
+  }
+}
+
+@media (max-width: #{$breakpoint-tablet}) {
+  @for $i from 33 through $total-segments {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  @for $i from 1 through $mobile-segments {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: block;
+    }
+  }
+
+  @for $i from ($segments-for-small-mobile + 1) through $mobile-segments {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+
+  @for $i from ($mobile-segments + 1) through $total-segments {
+    .cashback-levels__segment:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+
+@container main-content (max-width: 395px) {
+  .cashback-levels__segment:nth-child(26),
+  .cashback-levels__segment:nth-child(27) {
+    display: block;
+  }
+}
+
+// --- МАРКЕР ТА ХІТБОКС ---
+.cashback-levels__svg-trigger {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 3;
+
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: $bgc-general;
+  background: $bgc-btn;
+  border-radius: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cashback-levels__marker-icon {
+  display: inline-block;
+  font-size: 16px;
+  transition: transform 0.5s ease-out;
+  transform: rotate(0deg);
+}
+
+.cashback-levels__svg-trigger.is-active .cashback-levels__marker-icon {
+  transform: rotate(45deg);
+}
+
+.cashback-levels__hitbox-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cashback-levels__hitbox {
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+}
+
+// -------------------------------------------------------------------
+// --- АДАПТИВНІСТЬ: МОБІЛЬНА ВЕРСІЯ (< 767px) ---
+// -------------------------------------------------------------------
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .cashback-levels {
+    margin-bottom: 60px;
+  }
+
+  .cashback-levels__hitbox-row {
+    display: none;
+  }
+
+  .cashback-levels__top-row {
+    display: none;
+  }
+
+  .cashback-levels__bottom-row {
+    flex-direction: column;
+  }
+
+  .cashback-levels__svg-trigger {
+    display: none;
+  }
+
+  .cashback-levels__content-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .cashback-levels__track {
+    flex-direction: column;
+    gap: 4.5px;
+  }
+
+  .cashback-levels__bar {
+    transform: scaleY(0);
+    transform-origin: top;
+    width: 100%;
+    height: 100%;
+  }
+
+  @for $i from 1 through $total-segments {
+    .cashback-levels__segment.is-active:nth-child(#{$i}) .cashback-levels__bar {
+      animation-name: segment-fill-vertical; // !!! ВЕРТИКАЛЬНА АНІМАЦІЯ !!!
+      animation-duration: $single-fill-duration;
+      animation-fill-mode: forwards;
+      animation-timing-function: linear;
+      animation-delay: ($i - 1) * $single-fill-duration;
+      @if $i == 1 {
+        animation-duration: 0.001s;
+      }
+    }
+  }
+
+  .cashback-levels__segment {
+    padding: 3.5px;
+  }
+
+  .cashback-levels__track-wrapper {
+    position: relative;
+    z-index: 10;
+    margin-block: 0;
+    margin-top: 20px;
+  }
+
+  .cashback-levels__item-bottom {
+    padding-block: 20px;
+    width: 100%;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+
+    background-image: none;
+  }
+
+  .cashback-levels__item-bottom:not(:last-child) {
+    border-top: none;
+    border-bottom: 1px solid #3b3450;
+  }
+
+  .cashback-levels__amount {
+    margin-bottom: 4px;
+  }
+
+  .cashback-levels__cashback {
+    margin-bottom: 12px;
+  }
+
+  .cashback-levels__details-content {
+    text-align: left;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+  }
+
+  .cashback-levels__item-bottom.is-active .cashback-levels__details-content {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .cashback-levels__condition {
+    margin: 0;
+  }
+}
